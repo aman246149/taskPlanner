@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TimerProvider extends ChangeNotifier {
   List<Map<String, dynamic>> data = [];
 
- 
-
   Future setMessages(List<Map> messages) async {
     final _preferences = await SharedPreferences.getInstance();
+
     List<String> messagesString = [];
     messages.forEach((element) {
+      element["isWorking"] = false;
       messagesString.add(json.encode(element));
     });
     await _preferences.setStringList("mytimersList", messagesString);
@@ -22,13 +22,14 @@ class TimerProvider extends ChangeNotifier {
     final _preferences = await SharedPreferences.getInstance();
     List<String> messagesString =
         _preferences.getStringList("mytimersList") ?? [];
-    List<Map<String,dynamic>> messages = [];
+    List<Map<String, dynamic>> messages = [];
     if (messagesString.isNotEmpty) {
       messagesString.forEach((element) {
         messages.add(json.decode(element));
       });
     }
     data = messages;
+    print(data.toString());
     notifyListeners();
     return Future.value(messages);
   }
@@ -49,9 +50,9 @@ class TimerProvider extends ChangeNotifier {
         notifyListeners();
 
         if (data[index]["isWorking"] == false) {
-          print("true");
           print(data.toString());
           timer.cancel();
+          setMessages(data);
         }
       },
     );

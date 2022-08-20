@@ -11,22 +11,31 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   TextEditingController controller = TextEditingController();
   ScrollController scrollcontroller = ScrollController();
+  int? globalindex;
 
   @override
   void initState() {
     Provider.of<TimerProvider>(context, listen: false).getMessages();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
   @override
   void dispose() {
-    final provider = Provider.of<TimerProvider>(context, listen: false);
-    provider.setMessages(provider.data);
-    
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
+      final provider = Provider.of<TimerProvider>(context, listen: false);
+      provider.setMessages(provider.data);
+    }
   }
 
   @override
