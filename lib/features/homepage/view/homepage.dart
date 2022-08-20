@@ -14,8 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   TextEditingController controller = TextEditingController();
   ScrollController scrollcontroller = ScrollController();
-  int? globalindex;
 
+
+/// initstate for getting our task messages whenver our app open
   @override
   void initState() {
     Provider.of<TimerProvider>(context, listen: false).getMessages();
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     super.dispose();
   }
 
+///if we closed our app our state should be save to local db
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.inactive ||
@@ -43,7 +45,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("TaskPlanner"),
+        title: const Text("TaskPlanner"),
         centerTitle: true,
       ),
       body: Center(
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               child: Consumer<TimerProvider>(
                 builder: (context, value, child) {
                   if (value.data.isEmpty) {
-                    return Center(
+                    return const Center(
                       child: Text("You dont have any task ,please create task"),
                     );
                   }
@@ -97,8 +99,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           margin:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           padding: size < 700
-              ? EdgeInsets.only(left: 16, right: 8)
-              : EdgeInsets.only(left: 200, right: 200),
+              ? const EdgeInsets.only(left: 16, right: 8)
+              : const EdgeInsets.only(left: 200, right: 200),
           child: Row(
             children: [
               Expanded(

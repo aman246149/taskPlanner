@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TimerProvider extends ChangeNotifier {
   List<Map<String, dynamic>> data = [];
 
+  ///store data in db
   Future setMessages(List<Map> messages) async {
     final _preferences = await SharedPreferences.getInstance();
 
@@ -18,6 +19,7 @@ class TimerProvider extends ChangeNotifier {
     await _preferences.setStringList("mytimersList", messagesString);
   }
 
+  ///get data from db
   Future<List<Map>> getMessages() async {
     final _preferences = await SharedPreferences.getInstance();
     List<String> messagesString =
@@ -34,6 +36,7 @@ class TimerProvider extends ChangeNotifier {
     return Future.value(messages);
   }
 
+  ///start stop timer
   void startTimer(int index) {
     int count = data[index]["timer"];
     if (data[index]["isWorking"] == false) {
@@ -60,6 +63,7 @@ class TimerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// add new task in listview
   void addDataInList(String task) {
     data.add(
       {"task": task, "timer": 0, "isWorking": false},
