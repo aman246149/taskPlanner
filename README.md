@@ -1,16 +1,17 @@
 # taskplanner
 
-A new Flutter project.
+## web link ->  https://aman246149.github.io/taskPlannerDeployment/
+<hr>
+<br>
 
-## Getting Started
+# Features of the app
+- Timer functionality 
+- Store timer even if you close the app
+- simple and clean ui
 
-This project is a starting point for a Flutter application.
+<hr>
 
-A few resources to get you started if this is your first Flutter project:
+# Design 
+![image](https://user-images.githubusercontent.com/53884276/185730463-7c23bea2-85d1-4efe-b893-c59e290673f8.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
